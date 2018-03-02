@@ -11,3 +11,5 @@
 ## Address Book built with [Laravel](https://laravel.com/), [Vue.js](https://vuejs.org/)  and [Element Desktop UI Library](http://element.eleme.io/)
 
 ### [Demo](http://addressbook.romanpaprotsky.com/)
+
+>>>>>>> 5b3cb67b098bf9114361488d085bad3c3ab15533
