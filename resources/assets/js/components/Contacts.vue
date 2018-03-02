@@ -94,7 +94,7 @@
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="createContact">Create</el-button>
-                    <el-button @click="dialogAddContact = false">Cancel</el-button>
+                    <el-button @click="dialogAddContact = false; resetContact()">Cancel</el-button>
                 </el-form-item>
             </el-form>
         </el-dialog> <!-- /dialogAddContact -->
@@ -213,7 +213,6 @@
                             this.dialogAddContact = false;
                             this.$message.success('Contact have been created successfully!');
 
-                            this.$refs['addForm'].resetFields();
                             this.resetContact();
                         })
                         .catch(error => {
@@ -253,12 +252,11 @@
 
             initAddContact() {
                 this.dialogAddContact = true;
-                this.resetContact();
 
-                let that = this;
-                setTimeout(function() {
-                    that.$refs.addContactFirstName.focus();
-                }, 0)
+                // let that = this;
+                // setTimeout(function() {
+                //     that.$refs.addContactFirstName.focus();
+                // }, 0)
             },
 
             initDeleteContact(index) {
@@ -271,10 +269,10 @@
                 this.contactToUpdate = this.contacts[index];
                 this.imageUrl = this.contactToUpdate.avatar;
 
-                let that = this;
-                setTimeout(function() {
-                    that.$refs.updateContactFirstName.focus();
-                }, 0)
+                // let that = this;
+                // setTimeout(function() {
+                //     that.$refs.updateContactFirstName.focus();
+                // }, 0)
             },
 
             resetContact() {
@@ -285,9 +283,7 @@
                 this.contact.email = '';
                 this.contact.notes = '';
                 this.contact.phone = '';
-                this.formData.delete('contact');
-                this.formData.delete('file');
-                this.formData.delete('_method');
+                this.formData = new FormData();
                 this.imageUrl = '';
             },
 
@@ -411,6 +407,12 @@
 
     .el-table .cell {
         line-height: 14px;
+    }
+
+    .cell {
+        overflow: hidden !important;
+        white-space: nowrap !important;
+        text-overflow: ellipsis !important;
     }
 </style>
 

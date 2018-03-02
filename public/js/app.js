@@ -92772,7 +92772,7 @@ exports = module.exports = __webpack_require__(75)(false);
 
 
 // module
-exports.push([module.i, "\n.avatar-uploader {\n    text-align: center;\n}\n.avatar-uploader .el-upload {\n    border: 1px dashed #d9d9d9;\n    border-radius: 50%;\n    cursor: pointer;\n    position: relative;\n    overflow: hidden;\n}\n.avatar-uploader .el-upload:hover {\n    border-color: #409EFF;\n}\n.avatar-uploader-icon {\n    font-size: 28px;\n    color: #8c939d;\n    width: 178px;\n    height: 178px;\n    line-height: 178px;\n    text-align: center;\n}\n.avatar {\n    width: 178px;\n    height: 178px;\n    display: block;\n}\n.avatar-sm {\n    width: 46px;\n    height: 46px;\n    border-radius: 50%;\n}\n.avatar-md {\n    width: 100px;\n    height: 100px;\n    border-radius: 50%;\n}\n.el-dropdown {\n    position: relative;\n    float: right;\n}\n.el-dropdown-link {\n    margin-top: 15px;\n    display: inline-block;\n}\n.el-dropdown-link:hover .user-name {\n    color: #e5e9f2;\n}\n.el-dropdown-link:hover path {\n    fill: #e5e9f2;\n}\n.el-dropdown svg {\n    vertical-align: middle;\n    margin: 0 10px;\n}\n.el-table td {\n    padding: 6px 0;\n}\n.el-table .cell {\n    line-height: 14px;\n}\n", ""]);
+exports.push([module.i, "\n.avatar-uploader {\n    text-align: center;\n}\n.avatar-uploader .el-upload {\n    border: 1px dashed #d9d9d9;\n    border-radius: 50%;\n    cursor: pointer;\n    position: relative;\n    overflow: hidden;\n}\n.avatar-uploader .el-upload:hover {\n    border-color: #409EFF;\n}\n.avatar-uploader-icon {\n    font-size: 28px;\n    color: #8c939d;\n    width: 178px;\n    height: 178px;\n    line-height: 178px;\n    text-align: center;\n}\n.avatar {\n    width: 178px;\n    height: 178px;\n    display: block;\n}\n.avatar-sm {\n    width: 46px;\n    height: 46px;\n    border-radius: 50%;\n}\n.avatar-md {\n    width: 100px;\n    height: 100px;\n    border-radius: 50%;\n}\n.el-dropdown {\n    position: relative;\n    float: right;\n}\n.el-dropdown-link {\n    margin-top: 15px;\n    display: inline-block;\n}\n.el-dropdown-link:hover .user-name {\n    color: #e5e9f2;\n}\n.el-dropdown-link:hover path {\n    fill: #e5e9f2;\n}\n.el-dropdown svg {\n    vertical-align: middle;\n    margin: 0 10px;\n}\n.el-table td {\n    padding: 6px 0;\n}\n.el-table .cell {\n    line-height: 14px;\n}\n.cell {\n    overflow: hidden !important;\n    white-space: nowrap !important;\n    text-overflow: ellipsis !important;\n}\n", ""]);
 
 // exports
 
@@ -93363,7 +93363,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         _this.dialogAddContact = false;
                         _this.$message.success('Contact have been created successfully!');
 
-                        _this.$refs['addForm'].resetFields();
                         _this.resetContact();
                     }).catch(function (error) {
                         _this.$message.error('Oops! Something went wrong.');
@@ -93400,12 +93399,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         initAddContact: function initAddContact() {
             this.dialogAddContact = true;
-            this.resetContact();
 
-            var that = this;
-            setTimeout(function () {
-                that.$refs.addContactFirstName.focus();
-            }, 0);
+            // let that = this;
+            // setTimeout(function() {
+            //     that.$refs.addContactFirstName.focus();
+            // }, 0)
         },
         initDeleteContact: function initDeleteContact(index) {
             this.dialogDeleteContact = true;
@@ -93416,10 +93414,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.contactToUpdate = this.contacts[index];
             this.imageUrl = this.contactToUpdate.avatar;
 
-            var that = this;
-            setTimeout(function () {
-                that.$refs.updateContactFirstName.focus();
-            }, 0);
+            // let that = this;
+            // setTimeout(function() {
+            //     that.$refs.updateContactFirstName.focus();
+            // }, 0)
         },
         resetContact: function resetContact() {
             this.contact.first_name = '';
@@ -93429,9 +93427,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.contact.email = '';
             this.contact.notes = '';
             this.contact.phone = '';
-            this.formData.delete('contact');
-            this.formData.delete('file');
-            this.formData.delete('_method');
+            this.formData = new FormData();
             this.imageUrl = '';
         },
         updateContact: function updateContact() {
@@ -93875,6 +93871,7 @@ var render = function() {
                       on: {
                         click: function($event) {
                           _vm.dialogAddContact = false
+                          _vm.resetContact()
                         }
                       }
                     },
