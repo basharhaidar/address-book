@@ -12,4 +12,3 @@
 
 ### [Demo](http://addressbook.romanpaprotsky.com/)
 
->>>>>>> 5b3cb67b098bf9114361488d085bad3c3ab15533
