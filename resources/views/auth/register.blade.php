@@ -9,6 +9,8 @@
                 <div slot="header" class="clearfix">
                     <span>Register</span>
                 </div>
+
+
                 <el-form label-width="140px" label-position="right" method="POST" action="{{ route('register') }}">
                     @csrf
                     <el-form-item label="Name">
@@ -21,6 +23,31 @@
                             </el-alert>
                         @endif
                     </el-form-item>
+
+{{--                    <el-form-item label="Role">
+                        <select id="role" name="role" value="user" >
+                            <option value='user'> user </option>
+                            <option value="admin">admin</option>
+                        </select>
+                    </el-form-item>--}}
+
+                     <el-form-item label="Branch" >
+                         <div class="panel-body">
+
+                         <div class="form-group">
+
+                         <select id="branch_id" name="branch_id" value="user" >
+                            @forEach ($branches as $branch)
+                                 <option value='{{$branch->id}}'> {{$branch->name_branch}} </option>
+                            @endforeach
+                        </select>
+
+                         </div>
+                         </div>
+
+
+                     </el-form-item>
+
                     <el-form-item label="Email">
                         <el-input id="email" native-type="email" name="email" value="{{ old('email') }}" required autofocus auto-complete="off"></el-input>
                         @if ($errors->has('email'))
@@ -31,6 +58,8 @@
                             </el-alert>
                         @endif
                     </el-form-item>
+
+
                     <el-form-item label="Password">
                         <el-input id="password" type="password" name="password" required auto-complete="off"></el-input>
                         @if ($errors->has('password'))
@@ -41,12 +70,18 @@
                             </el-alert>
                         @endif
                     </el-form-item>
+
+
                     <el-form-item label="Confirm Password">
                         <el-input id="password-confirm" type="password" name="password_confirmation" required auto-complete="off"></el-input>
                     </el-form-item>
+
+
                     <el-form-item>
                         <el-button native-type="submit" type="primary">Register</el-button>
                     </el-form-item>
+
+
                 </el-form>
             </el-card>
         </el-col>

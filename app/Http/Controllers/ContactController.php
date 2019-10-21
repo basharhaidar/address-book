@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Branch;
 use App\Contact;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ContactController extends Controller
 {
@@ -20,11 +23,63 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::where(['user_id' => Auth::user()->id])->get();
+        $user=  Auth::user();
+       $branch = $user->branch_id;
+   /*    $flaq='%';
+       if($user->role=='user'){
+           $flags= Branch::user()->id;
+           foreach ($flags as $flag){
+           }
+           $contacts=  Contact::where('branch_id','like',$branch)->get();
 
+       }*/
+
+        if($user->role=="admin") {
+            $contacts = Contact::all();
+        }else{
+//           $contact= Contact::select('*')->with('user')->get();
+//          $contacts=  $contact->where('branch_id',$branch)->get();
+        //    $contacts=  Contact::where('branch_id',$branch)->get();
+          //  $contacts=  $contact->where('branch_id','=',$branch);
+
+            $contacts =DB::table('contacts')
+                ->join('users', 'contacts.user_id', '=', 'users.id')
+                ->where('users.branch_id','=', $branch)
+                ->where('deleted_at',null)
+                ->get();
+        }
         return response()->json([
             'contacts' => $contacts,
         ], 200);
+    }
+
+    public function index1()
+    {
+        $user=  Auth::user();
+        $branch = $user->branch_id;
+        /*    $flaq='%';
+            if($user->role=='user'){
+                $flags= Branch::user()->id;
+                foreach ($flags as $flag){
+                }
+                $contacts=  Contact::where('branch_id','like',$branch)->get();
+
+            }*/
+
+        //$contacts= Contact::with('user')->get();
+
+
+        $contacts =DB::table('contacts')
+            ->join('users', 'contacts.user_id', '=', 'users.id')
+            ->where('users.branch_id','=', $branch)
+            ->where('deleted_at',null)
+            ->get();
+
+
+        //    $contacts=  Contact::where('branch_id',$branch)->get();
+            //  $contacts=  $contact->where('branch_id','=',$branch);
+//        }
+        dd($contacts);
     }
 
     /**

@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','role','branch_id',
     ];
 
     /**
@@ -26,4 +26,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    
+    public function contact(){
+        return $this->hasMany('App\Contant','user_id');
+    }
+
+    public  function  branch(){
+        return $this->belongsTo('App\Branch','branch_id');
+    }
+
 }

@@ -23,6 +23,7 @@ class CreateContactsTable extends Migration
             $table->text('notes')->nullable();
             $table->string('phone')->nullable();
             $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
